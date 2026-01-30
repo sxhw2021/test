@@ -1,0 +1,20 @@
+[versions]
+compileSdk = "35"
+minSdk = "27"
+targetSdk = "35"
+agp = "8.7.3"
+kotlin = "2.0.21"
+lyriconProvider = "0.1.64"
+yukiHookApi = "1.2.1"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version = "2.0.21-1.0.27" }
+
+[libraries]
+lyricon-provider = { module = "io.github.proify.lyricon:provider", version.ref = "lyriconProvider" }
+yuki-hook-api = { module = "com.highcapable.yukihookapi:api", version.ref = "yukiHookApi" }
+yuki-hook-ksp = { module = "com.highcapable.yukihookapi:ksp-xposed", version.ref = "yukiHookApi" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.13.1" }
