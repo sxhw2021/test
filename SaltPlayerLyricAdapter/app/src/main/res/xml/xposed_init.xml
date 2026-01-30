@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<hook-module xmlns:yuki="http://schemas.android.com/hook/yuki"
-    yuki:package="io.github.proify.saltadapter"
-    yuki:hooker="io.github.proify.saltadapter.SaltPlayerHook">
-    
-    <scope name="com.salt.music" />
-    <scope name="android" />
-    
-</hook-module>
