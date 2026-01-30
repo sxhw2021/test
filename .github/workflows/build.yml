@@ -1,45 +1,17 @@
 name: Build APK
-
-on:
-  push:
-    branches: [ main, master ]
-  workflow_dispatch:
-
+on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v4
-    
-    - uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    
-    - uses: android-actions/setup-android@v3
-    
-    - run: |
-        echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
-        gradle :app:assembleDebug --info 2>&1 | tee build.log
-      env:
-        ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
-      continue-on-error: true
-    
-    - run: |
-        echo "=== Build Results ==="
-        find . -name "*.apk" 2>/dev/null || echo "No APK"
-        ls -la app/build/outputs/apk/ 2>/dev/null || true
-        tail -50 build.log || true
-    
-    - uses: actions/upload-artifact@v4
-      if: hashFiles('app/build/outputs/apk/debug/*.apk') != ''
-      with:
-        name: debug-apk
-        path: app/build/outputs/apk/debug/*.apk
-    
-    - uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: logs
-        path: build.log
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: android-actions/setup-android@v3
+      - run: gradle :app:assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/*.apk
