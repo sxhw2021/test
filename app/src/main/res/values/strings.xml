@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Salt Player Lyric Adapter</string>
+    <string name="module_description">Xposed module to extract lyrics from Salt Player for Lyricon</string>
+    <string-array name="lyricon_module_tags">
+        <item>$translation</item>
+    </string-array>
+</resources>
