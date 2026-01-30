@@ -1,28 +1,24 @@
 name: Build APK
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
+    - uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
-    
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    
-    - name: Build with Gradle
-      run: ./gradlew :app:assembleDebug
-    
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
+    - uses: gradle/gradle-build-action@v3
       with:
-        name: debug-apk
+        gradle-version: 8.7
+    - run: gradle :app:assembleDebug --stacktrace
+    - uses: actions/upload-artifact@v4
+      with:
+        name: salt-player-lyric-adapter-debug
         path: app/build/outputs/apk/debug/*.apk
